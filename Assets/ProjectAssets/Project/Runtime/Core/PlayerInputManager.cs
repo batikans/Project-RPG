@@ -16,9 +16,25 @@ namespace ProjectAssets.Project.Runtime.Core
     {
         private InputState _currentInputState;
         private EventParameters _eventParameters;
-        
+
+        private bool _isInputActive;
+
+        private void Awake()
+        {
+            EventManager.StartListening(ProjectConstants.OnSceneStartedLoading, DisableInput);
+            EventManager.StartListening(ProjectConstants.OnSceneFinishedLoading, EnableInput);
+        }
+
+        private void OnDestroy()
+        {
+            EventManager.StopListening(ProjectConstants.OnSceneStartedLoading, DisableInput);
+            EventManager.StopListening(ProjectConstants.OnSceneFinishedLoading, EnableInput);
+        }
+
         private void Update()
         {
+            if (!_isInputActive) return;
+            
             SentInputInfo();
         }
 
@@ -49,6 +65,16 @@ namespace ProjectAssets.Project.Runtime.Core
 
             _eventParameters.InputStateParameter = _currentInputState;
             EventManager.TriggerEvent(ProjectConstants.OnSentInputInfo, _eventParameters);
+        }
+        
+        private void EnableInput(EventParameters eventParameters)
+        {
+            _isInputActive = true;
+        }
+        
+        private void DisableInput(EventParameters eventParameters)
+        {
+            _isInputActive = false;
         }
     }
 }

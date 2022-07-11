@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5790861215781818635, guid: 5a8777de7ce94454c9485aaed92d84e8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 6.81
       objectReference: {fileID: 0}
     - target: {fileID: 5790861215781818635, guid: 5a8777de7ce94454c9485aaed92d84e8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5790861215781818635, guid: 5a8777de7ce94454c9485aaed92d84e8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -11.68
       objectReference: {fileID: 0}
     - target: {fileID: 5790861215781818635, guid: 5a8777de7ce94454c9485aaed92d84e8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -74,4 +74,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b305681241ec54c40aeced017e5c909e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 1
+  sceneName: 2

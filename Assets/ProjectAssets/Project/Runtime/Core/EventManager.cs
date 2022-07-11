@@ -30,8 +30,7 @@ namespace ProjectAssets.Project.Runtime.Core
 
         public static void StartListening(string eventName, Action<EventParameters> listener)
         {
-            Action<EventParameters> thisEvent;
-            if (Instance._eventDictionary.TryGetValue(eventName, out thisEvent))
+            if (Instance._eventDictionary.TryGetValue(eventName, out var thisEvent))
             {
                 //Add more event to the existing one
                 thisEvent += listener;
@@ -50,8 +49,7 @@ namespace ProjectAssets.Project.Runtime.Core
         public static void StopListening(string eventName, Action<EventParameters> listener)
         {
             if (_eventManager == null) return;
-            Action<EventParameters> thisEvent;
-            if (Instance._eventDictionary.TryGetValue(eventName, out thisEvent))
+            if (Instance._eventDictionary.TryGetValue(eventName, out var thisEvent))
             {
                 //Remove event from the existing one
                 thisEvent -= listener;
@@ -63,8 +61,7 @@ namespace ProjectAssets.Project.Runtime.Core
 
         public static void TriggerEvent(string eventName, EventParameters eventParameters)
         {
-            Action<EventParameters> thisEvent = null;
-            if (Instance._eventDictionary.TryGetValue(eventName, out thisEvent))
+            if (Instance._eventDictionary.TryGetValue(eventName, out var thisEvent))
             {
                 thisEvent.Invoke(eventParameters);
                 // OR USE  instance.eventDictionary[eventName](eventParam);

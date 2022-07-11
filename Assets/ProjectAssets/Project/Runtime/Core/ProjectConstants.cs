@@ -10,6 +10,7 @@ namespace ProjectAssets.Project.Runtime.Core
         public const string AnimationCancelAttack = "cancelAttack";
         
         //SCENE
+        public const string SceneCore = "Core";
         public const string SceneLevel01 = "Level 01";
         public const string SceneLevel02 = "Level 02";
         
@@ -19,6 +20,8 @@ namespace ProjectAssets.Project.Runtime.Core
         public const string OnCinematicFinished = "OnCinematicFinished";
         public const string OnCharacterDead = "OnCharacterDead";
         public const string OnSentSceneNameInfo = "OnSentSceneNameInfo";
+        public const string OnSceneStartedLoading = "OnSceneStartedLoading";
+        public const string OnSceneFinishedLoading = "OnSceneFinishedLoading";
 
         //TAGS
         public const string TagPlayer = "Player";

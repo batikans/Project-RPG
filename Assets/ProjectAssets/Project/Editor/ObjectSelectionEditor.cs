@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.Rendering;
 
 namespace ProjectAssets.Project.Editor
 {
@@ -14,7 +13,7 @@ namespace ProjectAssets.Project.Editor
             GetWindow<ObjectSelectionEditor>("Object Selector");
         }
     
-        void OnGUI ()
+        private void OnGUI ()
         {
             //---CHARACTER SELECTION
             GUILayout.Label("Select characters :");
