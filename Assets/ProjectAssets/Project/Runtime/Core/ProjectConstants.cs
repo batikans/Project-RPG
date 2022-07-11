@@ -11,12 +11,14 @@ namespace ProjectAssets.Project.Runtime.Core
         
         //SCENE
         public const string SceneLevel01 = "Level 01";
+        public const string SceneLevel02 = "Level 02";
         
         //EVENT
         public const string OnSentInputInfo = "OnSentInputInfo";
         public const string OnCinematicStarted = "OnCinematicStarted";
         public const string OnCinematicFinished = "OnCinematicFinished";
         public const string OnCharacterDead = "OnCharacterDead";
+        public const string OnSentSceneNameInfo = "OnSentSceneNameInfo";
 
         //TAGS
         public const string TagPlayer = "Player";

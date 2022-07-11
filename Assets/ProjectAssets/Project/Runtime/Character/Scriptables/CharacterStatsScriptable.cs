@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Project.Scripts.Runtime.Character.Scriptables
+namespace ProjectAssets.Project.Runtime.Character.Scriptables
 {
     [CreateAssetMenu(fileName = "CharacterStats", menuName = "ScriptableObjects/CharacterStats", order = 1)]
     public class CharacterStatsScriptable : ScriptableObject
@@ -19,3 +19,4 @@ namespace Project.Scripts.Runtime.Character.Scriptables
         public float timeBetweenAttacks;
     }
 }
+

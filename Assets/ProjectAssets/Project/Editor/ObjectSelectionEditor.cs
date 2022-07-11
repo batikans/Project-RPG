@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.Rendering;
 
-namespace Project.Scripts.Editor
+namespace ProjectAssets.Project.Editor
 {
     public class ObjectSelectionEditor : EditorWindow
     {

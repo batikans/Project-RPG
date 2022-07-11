@@ -24,6 +24,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 411088162a4e94b699567ee3585e23a8, type: 2}
     - target: {fileID: 4178282131319051056, guid: 0ba1c5510f15d4a4584b34eb8b103027, type: 3}
+      propertyPath: currentAttackRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178282131319051056, guid: 0ba1c5510f15d4a4584b34eb8b103027, type: 3}
       propertyPath: characterDefaultStats
       value: 
       objectReference: {fileID: 11400000, guid: fe39c8adf82ed4ff888d2c29de20f7cb, type: 2}
@@ -130,6 +134,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPath: {fileID: 0}
+--- !u!114 &3346434634255874314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3168782987642175227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d636169ae6fe49cb904e4ddddc37e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiStats: {fileID: 11400000, guid: 411088162a4e94b699567ee3585e23a8, type: 2}
+  chaseDistance: 0
+  suspicionDuration: 0
+  waypointTolerance: 0
+  waypointDwellingDuration: 0
 --- !u!1001 &8924068951207225327
 PrefabInstance:
   m_ObjectHideFlags: 0

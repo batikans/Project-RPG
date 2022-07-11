@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Project.Scripts.Runtime.Character.Scriptables
+namespace ProjectAssets.Project.Runtime.Character.Scriptables
 {
     [CreateAssetMenu(fileName = "AIStats", menuName = "ScriptableObjects/AIStats", order = 2)]
     public class AIStatsScriptable : ScriptableObject

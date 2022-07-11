@@ -1,4 +1,3 @@
-using Project.Scripts.Runtime.Character;
 using ProjectAssets.Project.Runtime.Core;
 using UnityEngine;
 using UnityEngine.AI;

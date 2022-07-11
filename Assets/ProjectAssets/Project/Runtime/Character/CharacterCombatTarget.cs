@@ -1,4 +1,3 @@
-using Project.Scripts.Runtime.Character;
 using UnityEngine;
 
 namespace ProjectAssets.Project.Runtime.Character

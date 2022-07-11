@@ -1,4 +1,4 @@
-using Project.Scripts.Runtime.Character.Scriptables;
+using ProjectAssets.Project.Runtime.Character.Scriptables;
 using UnityEngine;
 
 namespace ProjectAssets.Project.Runtime.Character
