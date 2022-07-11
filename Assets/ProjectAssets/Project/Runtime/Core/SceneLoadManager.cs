@@ -23,16 +23,23 @@ namespace ProjectAssets.Project.Runtime.Core
 
         private void Start()
         {
+            LoadInitialScenes();
+        }
+
+        private void LoadInitialScenes()
+        {
+            SceneManager.LoadSceneAsync(ProjectConstants.SceneUI,LoadSceneMode.Additive);
+            
             var eventPar = new EventParameters()
             {
-                SceneNameParameter = SceneName.Level01
+                SceneName = SceneName.Level01
             };
             LoadScene(eventPar);
         }
 
         private void LoadScene(EventParameters eventParameters)
         {
-            _sceneNameToUse = eventParameters.SceneNameParameter;
+            _sceneNameToUse = eventParameters.SceneName;
             
             switch (_sceneNameToUse)
             {
@@ -43,8 +50,6 @@ namespace ProjectAssets.Project.Runtime.Core
                     _sceneNameToLoad = ProjectConstants.SceneLevel02;
                     break;
             }
-
-            eventParameters.StringParameter = _sceneNameToLoad;
             
             StartCoroutine(LoadSceneCoroutine(eventParameters));
         }

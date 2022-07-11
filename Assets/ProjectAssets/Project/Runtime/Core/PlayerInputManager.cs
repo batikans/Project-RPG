@@ -63,7 +63,7 @@ namespace ProjectAssets.Project.Runtime.Core
                 _currentInputState = InputState.DownArrow;
             }
 
-            _eventParameters.InputStateParameter = _currentInputState;
+            _eventParameters.InputState = _currentInputState;
             EventManager.TriggerEvent(ProjectConstants.OnSentInputInfo, _eventParameters);
         }
         

@@ -19,6 +19,11 @@ namespace ProjectAssets.Project.Editor
                 var scenePath = "Assets/ProjectAssets/Scenes/Core.unity";
                 EditorSceneManager.OpenScene(scenePath);
             }
+            if (GUILayout.Button("Load UI Scene"))
+            {
+                var scenePath = "Assets/ProjectAssets/Scenes/UI.unity";
+                EditorSceneManager.OpenScene(scenePath);
+            }
             if (GUILayout.Button("Load Level 01"))
             {
                 var scenePath = "Assets/ProjectAssets/Scenes/Level 01.unity";

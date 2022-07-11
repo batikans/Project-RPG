@@ -1,10 +1,12 @@
 using ProjectAssets.Project.Runtime.Core;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace ProjectAssets.Project.Runtime.Character.Controller
 {
     [RequireComponent(typeof(CharacterMovement))]
     [RequireComponent(typeof(CharacterCombat))]
+    [RequireComponent(typeof(NavMeshAgent))]
     public class PlayerController : MonoBehaviour
     {
         [Header("Cache")] 
@@ -13,6 +15,7 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         private CharacterMovement _characterMovement;
         private CharacterCombat _characterCombat;
         private CharacterCombatTarget _characterCombatTarget;
+        private NavMeshAgent _agent;
         
         [Header("Settings")] 
         [SerializeField] private LayerMask terrainLayer;
@@ -35,6 +38,7 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
             _characterMovement = GetComponent<CharacterMovement>();
             _characterCombat = GetComponent<CharacterCombat>();
             _characterCombatTarget = GetComponent<CharacterCombatTarget>();
+            _agent = GetComponent<NavMeshAgent>();
         }
 
         private void OnDestroy()
@@ -57,13 +61,13 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         
         private bool InteractWithMovement(EventParameters parameters)
         {
-            if (parameters.InputStateParameter != InputState.MouseHold) return false;
+            if (parameters.InputState != InputState.MouseHold) return false;
             return MoveToCursor();
         }
 
         private bool InteractWithCombat(EventParameters parameters)
         {
-            if (parameters.InputStateParameter is not (InputState.MouseDown or InputState.MouseHold))
+            if (parameters.InputState is not (InputState.MouseDown or InputState.MouseHold))
                 return false;
             
             var hits = new RaycastHit[3];
@@ -79,7 +83,7 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
                 var isCombatTargetDead = combatTarget.GetComponent<CharacterHealth>().IsDead();
                 if (isCombatTargetDead) continue;
 
-                if (parameters.InputStateParameter is (InputState.MouseDown or InputState.MouseHold))
+                if (parameters.InputState is (InputState.MouseDown or InputState.MouseHold))
                 {
                     _characterCombat.Attack(combatTarget);
                 }
@@ -107,15 +111,16 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
 
         private void SetupInitialPlayerTransform(EventParameters eventParameters)
         {
-            if (eventParameters.BoolParameter == false) return;
+            if (eventParameters.IsTeleporting == false) return;
             
-            var positionToUse = eventParameters.Vector3Parameter;
-            transform.position = positionToUse;
+            var positionToUse = eventParameters.PlayerSpawnPosition;
+            
+            _agent.Warp(positionToUse); //Sets position without conflicting with agent
         }
 
         private void DisableControl(EventParameters parameters)
         {
-            if (parameters.GameObjectParameter != null && parameters.GameObjectParameter != gameObject) return;
+            if (parameters.CharacterGameObject != null && parameters.CharacterGameObject != gameObject) return;
             
             _canControl = false;
             _characterCombat.CancelAction();

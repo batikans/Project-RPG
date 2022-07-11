@@ -34,14 +34,14 @@ namespace ProjectAssets.Project.Runtime.CameraAndCinematics
 
         private void ZoomBehaviour(EventParameters eventParameters)
         {
-            if (eventParameters.InputStateParameter is not (InputState.UpArrow or InputState.DownArrow)) return;
+            if (eventParameters.InputState is not (InputState.UpArrow or InputState.DownArrow)) return;
 
             if (_componentBase is not CinemachineFramingTransposer) return;
             
             var framingTransposer = _componentBase as CinemachineFramingTransposer;
             var valueToUse = framingTransposer.m_CameraDistance;   
             
-            if (eventParameters.InputStateParameter == InputState.UpArrow)
+            if (eventParameters.InputState == InputState.UpArrow)
             {
                 if (valueToUse >= maxDistance)
                 {

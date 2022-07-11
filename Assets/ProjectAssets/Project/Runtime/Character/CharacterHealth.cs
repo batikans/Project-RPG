@@ -37,8 +37,8 @@ namespace ProjectAssets.Project.Runtime.Character
 
             var eventParameters = new EventParameters()
             {
-                GameObjectParameter = gameObject,
-                BoolParameter = _isDead
+                CharacterGameObject = gameObject,
+                IsDead = _isDead
             };
             
             EventManager.TriggerEvent(ProjectConstants.OnCharacterDead, eventParameters);

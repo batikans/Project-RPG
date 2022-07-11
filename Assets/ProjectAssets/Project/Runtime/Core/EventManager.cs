@@ -75,10 +75,11 @@ namespace ProjectAssets.Project.Runtime.Core
         public string StringParameter;
         public int INTParameter;
         public float FloatParameter;
-        public bool BoolParameter;
-        public Vector3 Vector3Parameter;
-        public GameObject GameObjectParameter;
-        public InputState InputStateParameter;
-        public SceneName SceneNameParameter;
+        public bool IsTeleporting;
+        public bool IsDead;
+        public Vector3 PlayerSpawnPosition;
+        public GameObject CharacterGameObject;
+        public InputState InputState;
+        public SceneName SceneName;
     }
 }

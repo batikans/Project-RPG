@@ -19,9 +19,9 @@ namespace ProjectAssets.Project.Runtime.SceneManagement
             _isPortalActivated = true;
             _eventParameters = new EventParameters()
             {
-                SceneNameParameter = sceneName,
-                Vector3Parameter = playerSpawnTransform.position,
-                BoolParameter = _isPortalActivated
+                SceneName = sceneName,
+                PlayerSpawnPosition = playerSpawnTransform.position,
+                IsTeleporting = _isPortalActivated
             };
                 
             EventManager.TriggerEvent(ProjectConstants.OnSentSceneNameInfo, _eventParameters);

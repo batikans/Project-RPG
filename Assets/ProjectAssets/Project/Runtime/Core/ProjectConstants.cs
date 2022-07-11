@@ -11,6 +11,7 @@ namespace ProjectAssets.Project.Runtime.Core
         
         //SCENE
         public const string SceneCore = "Core";
+        public const string SceneUI = "UI";
         public const string SceneLevel01 = "Level 01";
         public const string SceneLevel02 = "Level 02";
         

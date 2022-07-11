@@ -148,7 +148,7 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         
         private void DisableControl(EventParameters parameters)
         {
-            if (parameters.GameObjectParameter != gameObject) return;
+            if (parameters.CharacterGameObject != gameObject) return;
             _canControl = false;
             _characterCombat.CancelAction();
             _characterMovement.CancelAction();

@@ -59,7 +59,7 @@ namespace ProjectAssets.Project.Runtime.Character
 
         private void TriggerDeathAnimation(EventParameters eventParameters)
         {
-            if (eventParameters.GameObjectParameter != gameObject) return;
+            if (eventParameters.CharacterGameObject != gameObject) return;
             
             TriggerAnimation(ProjectConstants.AnimationDeath);
         }
