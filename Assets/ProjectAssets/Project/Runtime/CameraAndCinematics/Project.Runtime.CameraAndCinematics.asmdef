@@ -1,0 +1,17 @@
+{
+    "name": "Project.Runtime.CameraAndCinematics",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3852bf75bfc53413486fdcb0f530c5cd",
+        "GUID:4307f53044263cf4b835bd812fc161a4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
