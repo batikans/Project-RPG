@@ -10,8 +10,6 @@ namespace ProjectAssets.Project.Runtime.Core
         
         private string _sceneNameToLoad;
         private string _sceneNameToUnload;
-
-        private Transform _playerSpawnTransform;
         
         private void Awake()
         {
@@ -47,6 +45,7 @@ namespace ProjectAssets.Project.Runtime.Core
             }
 
             eventParameters.StringParameter = _sceneNameToLoad;
+            
             StartCoroutine(LoadSceneCoroutine(eventParameters));
         }
         

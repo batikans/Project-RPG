@@ -80,6 +80,5 @@ namespace ProjectAssets.Project.Runtime.Core
         public GameObject GameObjectParameter;
         public InputState InputStateParameter;
         public SceneName SceneNameParameter;
-        public Transform TransformParameter;
     }
 }

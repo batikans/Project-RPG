@@ -109,8 +109,8 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         {
             if (eventParameters.BoolParameter == false) return;
             
-            var transformToUse = eventParameters.TransformParameter;
-            transform.position = transformToUse.position;
+            var positionToUse = eventParameters.Vector3Parameter;
+            transform.position = positionToUse;
         }
 
         private void DisableControl(EventParameters parameters)

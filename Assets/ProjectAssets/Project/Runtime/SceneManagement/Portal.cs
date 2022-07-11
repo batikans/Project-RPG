@@ -20,7 +20,7 @@ namespace ProjectAssets.Project.Runtime.SceneManagement
             _eventParameters = new EventParameters()
             {
                 SceneNameParameter = sceneName,
-                TransformParameter = playerSpawnTransform,
+                Vector3Parameter = playerSpawnTransform.position,
                 BoolParameter = _isPortalActivated
             };
                 
