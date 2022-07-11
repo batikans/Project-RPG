@@ -79,6 +79,7 @@ namespace ProjectAssets.Project.Runtime.Core
         public Vector3 Vector3Parameter;
         public GameObject GameObjectParameter;
         public InputState InputStateParameter;
-        public SceneName SceneName;
+        public SceneName SceneNameParameter;
+        public Transform TransformParameter;
     }
 }

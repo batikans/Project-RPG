@@ -25,6 +25,7 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
             EventManager.StartListening(ProjectConstants.OnCharacterDead, DisableControl);
             EventManager.StartListening(ProjectConstants.OnCinematicStarted, DisableControl);
             EventManager.StartListening(ProjectConstants.OnCinematicFinished, EnableControl);
+            EventManager.StartListening(ProjectConstants.OnSceneFinishedLoading, SetupInitialPlayerTransform);
             
             Initialize();
         }
@@ -42,6 +43,7 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
             EventManager.StopListening(ProjectConstants.OnCharacterDead, DisableControl);
             EventManager.StopListening(ProjectConstants.OnCinematicStarted, DisableControl);
             EventManager.StopListening(ProjectConstants.OnCinematicFinished, EnableControl);
+            EventManager.StopListening(ProjectConstants.OnSceneFinishedLoading, SetupInitialPlayerTransform);
         }
 
         private void PlayerActionPriority(EventParameters parameters)
@@ -101,6 +103,14 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         {
             var inputRay = gameCamera.ScreenPointToRay(Input.mousePosition);
             return inputRay;
+        }
+
+        private void SetupInitialPlayerTransform(EventParameters eventParameters)
+        {
+            if (eventParameters.BoolParameter == false) return;
+            
+            var transformToUse = eventParameters.TransformParameter;
+            transform.position = transformToUse.position;
         }
 
         private void DisableControl(EventParameters parameters)

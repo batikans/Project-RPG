@@ -6,6 +6,7 @@ namespace ProjectAssets.Project.Runtime.SceneManagement
     public class Portal : MonoBehaviour
     {
         [SerializeField] private SceneName sceneName;
+        [SerializeField] private Transform playerSpawnTransform;
 
         private bool _isPortalActivated;
         
@@ -18,7 +19,9 @@ namespace ProjectAssets.Project.Runtime.SceneManagement
             _isPortalActivated = true;
             _eventParameters = new EventParameters()
             {
-                SceneName = sceneName
+                SceneNameParameter = sceneName,
+                TransformParameter = playerSpawnTransform,
+                BoolParameter = _isPortalActivated
             };
                 
             EventManager.TriggerEvent(ProjectConstants.OnSentSceneNameInfo, _eventParameters);

@@ -1215,10 +1215,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3377675736637025254, guid: 5d11feb1503e049d4ae0d45e00d386d5, type: 3}
-      propertyPath: sceneName
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5213060146028752920, guid: 5d11feb1503e049d4ae0d45e00d386d5, type: 3}
       propertyPath: m_Name
       value: PortalTeleportLevel 01

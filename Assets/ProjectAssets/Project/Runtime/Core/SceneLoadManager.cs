@@ -10,6 +10,8 @@ namespace ProjectAssets.Project.Runtime.Core
         
         private string _sceneNameToLoad;
         private string _sceneNameToUnload;
+
+        private Transform _playerSpawnTransform;
         
         private void Awake()
         {
@@ -25,14 +27,14 @@ namespace ProjectAssets.Project.Runtime.Core
         {
             var eventPar = new EventParameters()
             {
-                SceneName = SceneName.Level01
+                SceneNameParameter = SceneName.Level01
             };
             LoadScene(eventPar);
         }
 
         private void LoadScene(EventParameters eventParameters)
         {
-            _sceneNameToUse = eventParameters.SceneName;
+            _sceneNameToUse = eventParameters.SceneNameParameter;
             
             switch (_sceneNameToUse)
             {
@@ -44,20 +46,23 @@ namespace ProjectAssets.Project.Runtime.Core
                     break;
             }
 
-            StartCoroutine(LoadScene(_sceneNameToLoad));
+            eventParameters.StringParameter = _sceneNameToLoad;
+            StartCoroutine(LoadSceneCoroutine(eventParameters));
         }
         
-        private IEnumerator LoadScene(string sceneNameString)
+        private IEnumerator LoadSceneCoroutine(EventParameters eventParameters)
         {
-            EventManager.TriggerEvent(ProjectConstants.OnSceneStartedLoading, new EventParameters());
+            EventManager.TriggerEvent(ProjectConstants.OnSceneStartedLoading, eventParameters);
             print("scene started loading");
+            
             if (_sceneNameToUnload != null)
             {
                 yield return SceneManager.UnloadSceneAsync(_sceneNameToUnload);
             }
-            yield return SceneManager.LoadSceneAsync(sceneNameString,LoadSceneMode.Additive);
+            yield return SceneManager.LoadSceneAsync(_sceneNameToLoad,LoadSceneMode.Additive);
+            
             _sceneNameToUnload = _sceneNameToLoad;
-            EventManager.TriggerEvent(ProjectConstants.OnSceneFinishedLoading, new EventParameters());
+            EventManager.TriggerEvent(ProjectConstants.OnSceneFinishedLoading, eventParameters);
             print("scene loaded");
         }
     }
