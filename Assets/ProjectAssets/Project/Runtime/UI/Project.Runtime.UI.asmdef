@@ -1,3 +1,16 @@
 {
-	"name": "Project.Runtime.UI"
+    "name": "Project.Runtime.UI",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3852bf75bfc53413486fdcb0f530c5cd"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

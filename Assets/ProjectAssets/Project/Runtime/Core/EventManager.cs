@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace ProjectAssets.Project.Runtime.Core
 {
@@ -19,6 +22,7 @@ namespace ProjectAssets.Project.Runtime.Core
                     _eventManager = new EventManager();
                     _eventManager.Init();
                 }
+
                 return _eventManager;
             }
         }
@@ -59,11 +63,17 @@ namespace ProjectAssets.Project.Runtime.Core
             }
         }
 
-        public static void TriggerEvent(string eventName, EventParameters eventParameters)
+        public static void TriggerEvent(string eventName, EventParameters eventParameters,
+            [CallerMemberName] string memberName = "")
         {
+            StackFrame frame = new StackFrame(1);
+            var method = frame.GetMethod();
+            var type = method.DeclaringType;
+
             if (Instance._eventDictionary.TryGetValue(eventName, out var thisEvent))
             {
                 thisEvent.Invoke(eventParameters);
+                Debug.Log("**** EVENT **** " + eventName + " **** " + type?.Name + " **** " + memberName);
                 // OR USE  instance.eventDictionary[eventName](eventParam);
             }
         }

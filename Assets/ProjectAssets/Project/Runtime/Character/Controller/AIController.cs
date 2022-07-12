@@ -55,7 +55,7 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
 
         private void OnDestroy()
         {
-            EventManager.StartListening(ProjectConstants.OnCharacterDead, DisableControl);
+            EventManager.StopListening(ProjectConstants.OnCharacterDead, DisableControl);
         }
 
         private void Start()

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace ProjectAssets.Project.Runtime.UI
+namespace ProjectAssets.Project.Runtime.Core
 {
     [RequireComponent(typeof(CanvasGroup))]
     public class SceneTransitionCanvas : MonoBehaviour

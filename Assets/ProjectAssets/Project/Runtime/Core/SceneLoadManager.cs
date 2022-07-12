@@ -1,5 +1,4 @@
 using System.Collections;
-using ProjectAssets.Project.Runtime.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -58,7 +57,7 @@ namespace ProjectAssets.Project.Runtime.Core
         private IEnumerator LoadSceneCoroutine(EventParameters eventParameters)
         {
             EventManager.TriggerEvent(ProjectConstants.OnSceneStartedLoading, eventParameters);
-            yield return SceneTransitionCanvas.FadeOutCoroutine(1f);
+            yield return SceneTransitionCanvas.FadeOutCoroutine(0.2f);
             
             if (_sceneNameToUnload != null)
             {
@@ -69,7 +68,7 @@ namespace ProjectAssets.Project.Runtime.Core
             _sceneNameToUnload = _sceneNameToLoad;
             EventManager.TriggerEvent(ProjectConstants.OnSceneFinishedLoading, eventParameters);
             yield return new WaitForSeconds(1f);
-            yield return SceneTransitionCanvas.FadeInCoroutine(1f);
+            yield return SceneTransitionCanvas.FadeInCoroutine(0.3f);
         }
     }
 

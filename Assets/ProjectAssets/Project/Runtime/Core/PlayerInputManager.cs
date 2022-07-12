@@ -7,7 +7,8 @@ public enum InputState
     MouseUp,
     MouseHold,
     UpArrow,
-    DownArrow
+    DownArrow,
+    ESC
 }
 
 namespace ProjectAssets.Project.Runtime.Core
@@ -61,6 +62,10 @@ namespace ProjectAssets.Project.Runtime.Core
             else if (Input.GetKey(KeyCode.DownArrow))
             {
                 _currentInputState = InputState.DownArrow;
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                _currentInputState = InputState.ESC;
             }
 
             _eventParameters.InputState = _currentInputState;

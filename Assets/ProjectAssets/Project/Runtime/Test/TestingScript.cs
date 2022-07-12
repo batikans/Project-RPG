@@ -1,6 +1,9 @@
+using System;
+using System.Linq.Expressions;
+using System.Reflection;
 using UnityEngine;
 
-namespace ProjectAssets.Project.Runtime.GameCamera
+namespace ProjectAssets.Project.Runtime.Test
 {
     public class TestingScript : MonoBehaviour
     {
@@ -9,14 +12,9 @@ namespace ProjectAssets.Project.Runtime.GameCamera
             print("Awake");
         }
 
-        private void Start()
+        private void TestMethod ([System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
         {
-            
-        }
-
-        private void Update()
-        {
-            
+            //Debug.Log(type.Name);
         }
     }
 }
