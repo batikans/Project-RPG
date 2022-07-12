@@ -59,7 +59,6 @@ namespace ProjectAssets.Project.Runtime.Core
         {
             EventManager.TriggerEvent(ProjectConstants.OnSceneStartedLoading, eventParameters);
             yield return SceneTransitionCanvas.FadeOutCoroutine(1f);
-            print("scene started loading");
             
             if (_sceneNameToUnload != null)
             {
@@ -71,7 +70,6 @@ namespace ProjectAssets.Project.Runtime.Core
             EventManager.TriggerEvent(ProjectConstants.OnSceneFinishedLoading, eventParameters);
             yield return new WaitForSeconds(1f);
             yield return SceneTransitionCanvas.FadeInCoroutine(1f);
-            print("scene loaded");
         }
     }
 
