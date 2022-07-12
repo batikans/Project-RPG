@@ -1,4 +1,5 @@
 using System.Collections;
+using ProjectAssets.Project.Runtime.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,12 +24,12 @@ namespace ProjectAssets.Project.Runtime.Core
 
         private void Start()
         {
-            LoadInitialScenes();
+            StartCoroutine(LoadInitialScenes());
         }
 
-        private void LoadInitialScenes()
+        private IEnumerator LoadInitialScenes()
         {
-            SceneManager.LoadSceneAsync(ProjectConstants.SceneUI,LoadSceneMode.Additive);
+            yield return SceneManager.LoadSceneAsync(ProjectConstants.SceneUI,LoadSceneMode.Additive);
             
             var eventPar = new EventParameters()
             {
@@ -57,6 +58,7 @@ namespace ProjectAssets.Project.Runtime.Core
         private IEnumerator LoadSceneCoroutine(EventParameters eventParameters)
         {
             EventManager.TriggerEvent(ProjectConstants.OnSceneStartedLoading, eventParameters);
+            yield return SceneTransitionCanvas.FadeOutCoroutine(1f);
             print("scene started loading");
             
             if (_sceneNameToUnload != null)
@@ -67,6 +69,7 @@ namespace ProjectAssets.Project.Runtime.Core
             
             _sceneNameToUnload = _sceneNameToLoad;
             EventManager.TriggerEvent(ProjectConstants.OnSceneFinishedLoading, eventParameters);
+            yield return SceneTransitionCanvas.FadeInCoroutine(1f);
             print("scene loaded");
         }
     }

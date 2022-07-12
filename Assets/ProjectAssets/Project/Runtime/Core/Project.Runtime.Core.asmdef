@@ -1,7 +1,9 @@
 {
     "name": "Project.Runtime.Core",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:6f199faff8fe84006bdd226bbe88d5b1"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
