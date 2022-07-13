@@ -26,7 +26,6 @@ namespace ProjectAssets.Project.Runtime.UI
         
         public void QuitApplication()
         {
-            Debug.Log("QUIT");
             Application.Quit();
         }
     }
