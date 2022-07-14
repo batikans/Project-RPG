@@ -19,7 +19,7 @@ namespace ProjectAssets.Project.Runtime.UI
 
         private void ToggleSettingsMenu(EventParameters eventParameters)
         {
-            if (eventParameters.InputState != InputState.ESC) return;
+            if (eventParameters.InputState != InputState.EscDown) return;
 
             settingsObject.SetActive(!settingsObject.activeInHierarchy);
         }

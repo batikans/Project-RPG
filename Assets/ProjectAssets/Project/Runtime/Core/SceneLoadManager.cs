@@ -29,6 +29,7 @@ namespace ProjectAssets.Project.Runtime.Core
         private IEnumerator LoadInitialScenes()
         {
             yield return SceneManager.LoadSceneAsync(ProjectConstants.SceneUI,LoadSceneMode.Additive);
+            yield return null;
             
             var eventPar = new EventParameters()
             {

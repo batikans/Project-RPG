@@ -1,7 +1,7 @@
 using ProjectAssets.Project.Runtime.Character.Scriptables;
 using UnityEngine;
 
-namespace ProjectAssets.Project.Runtime.Character
+namespace ProjectAssets.Project.Runtime.Character.AI
 {
     public class AIStats : MonoBehaviour
     {

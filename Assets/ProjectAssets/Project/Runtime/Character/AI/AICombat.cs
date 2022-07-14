@@ -2,19 +2,19 @@ using ProjectAssets.Project.Runtime.Core;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace ProjectAssets.Project.Runtime.Character
+namespace ProjectAssets.Project.Runtime.Character.AI
 {
     [RequireComponent(typeof(CharacterStats))]
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(CharacterCombatTarget))]
     [RequireComponent(typeof(ActionScheduler))]
-    [RequireComponent(typeof(CharacterAnimation))]
-    public class CharacterCombat : MonoBehaviour, IAction
+    [RequireComponent(typeof(AIAnimation))]
+    public class AICombat : MonoBehaviour, IAction
     {
         private NavMeshAgent _agent;
         private CharacterCombatTarget _lastCombatTarget;
         private ActionScheduler _actionScheduler;
-        private CharacterAnimation _characterAnimation;
+        private AIAnimation _aiAnimation;
         private CharacterStats _characterStats;
 
         private bool _isAttacking;
@@ -30,7 +30,7 @@ namespace ProjectAssets.Project.Runtime.Character
         {
             _agent = GetComponent<NavMeshAgent>();
             _actionScheduler = GetComponent<ActionScheduler>();
-            _characterAnimation = GetComponent<CharacterAnimation>();
+            _aiAnimation = GetComponent<AIAnimation>();
             _characterStats = GetComponent<CharacterStats>();
         }
 
@@ -69,8 +69,8 @@ namespace ProjectAssets.Project.Runtime.Character
             if (_timeElapsedSinceLastAttack >= _characterStats.currentTimeBetweenAttacks)
             {
                 _timeElapsedSinceLastAttack = 0f;
-                _characterAnimation.ResetTriggerAnimation(ProjectConstants.AnimationCancelAttack);
-                _characterAnimation.TriggerAnimation(ProjectConstants.AnimationAttack, _characterStats.currentAttackRate);
+                _aiAnimation.ResetTriggerAnimation(ProjectConstants.AnimationCancelAttack);
+                _aiAnimation.TriggerAnimation(ProjectConstants.AnimationAttack, _characterStats.currentAttackRate);
             }
         }
         
@@ -92,8 +92,8 @@ namespace ProjectAssets.Project.Runtime.Character
         public void CancelAction()
         {
             _isAttacking = false;
-            _characterAnimation.ResetTriggerAnimation(ProjectConstants.AnimationAttack);
-            _characterAnimation.TriggerAnimation(ProjectConstants.AnimationCancelAttack);
+            _aiAnimation.ResetTriggerAnimation(ProjectConstants.AnimationAttack);
+            _aiAnimation.TriggerAnimation(ProjectConstants.AnimationCancelAttack);
         }
 
         //ANIMATION EVENT

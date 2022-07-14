@@ -8,7 +8,9 @@ public enum InputState
     MouseHold,
     UpArrow,
     DownArrow,
-    ESC
+    EscDown,
+    SDown,
+    LDown
 }
 
 namespace ProjectAssets.Project.Runtime.Core
@@ -36,7 +38,7 @@ namespace ProjectAssets.Project.Runtime.Core
         {
             if (!_isInputActive) return;
             
-            SentInputInfo();
+            //SentInputInfo();
         }
 
         private void SentInputInfo()
@@ -65,11 +67,19 @@ namespace ProjectAssets.Project.Runtime.Core
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
-                _currentInputState = InputState.ESC;
+                _currentInputState = InputState.EscDown;
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                _currentInputState = InputState.SDown;
+            }
+            else if (Input.GetKeyDown(KeyCode.L))
+            {
+                _currentInputState = InputState.LDown;
             }
 
             _eventParameters.InputState = _currentInputState;
-            EventManager.TriggerEvent(ProjectConstants.OnSentInputInfo, _eventParameters);
+            //EventManager.TriggerEvent(ProjectConstants.OnSentInputInfo, _eventParameters);
         }
         
         private void EnableInput(EventParameters eventParameters)

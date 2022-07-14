@@ -2,7 +2,9 @@
     "name": "Project.Runtime.Character",
     "rootNamespace": "",
     "references": [
-        "GUID:3852bf75bfc53413486fdcb0f530c5cd"
+        "GUID:3852bf75bfc53413486fdcb0f530c5cd",
+        "GUID:757123328e506406191bfb19b55fe003",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,3 +1,4 @@
+using ProjectAssets.Project.Runtime.Character.AI;
 using ProjectAssets.Project.Runtime.Core;
 using UnityEngine;
 
@@ -5,8 +6,8 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
 {
     [RequireComponent(typeof(CharacterStats))]
     [RequireComponent(typeof(AIStats))]
-    [RequireComponent(typeof(CharacterMovement))]
-    [RequireComponent(typeof(CharacterCombat))]
+    [RequireComponent(typeof(AIMovement))]
+    [RequireComponent(typeof(AICombat))]
     [RequireComponent(typeof(ActionScheduler))]
     public class AIController : MonoBehaviour
     {
@@ -15,8 +16,8 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         
         private CharacterStats _characterStats;
         private AIStats _aiStats;
-        private CharacterMovement _characterMovement;
-        private CharacterCombat _characterCombat;
+        private AIMovement _aiMovement;
+        private AICombat _aiCombat;
 
         private Transform _playerTransform;
         private CharacterCombatTarget _playerCombatTarget;
@@ -46,8 +47,8 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         {
             _characterStats = GetComponent<CharacterStats>();
             _aiStats = GetComponent<AIStats>();
-            _characterMovement = GetComponent<CharacterMovement>();
-            _characterCombat = GetComponent<CharacterCombat>();
+            _aiMovement = GetComponent<AIMovement>();
+            _aiCombat = GetComponent<AICombat>();
             _actionScheduler = GetComponent<ActionScheduler>();
             _playerTransform = GameObject.FindGameObjectWithTag(ProjectConstants.TagPlayer).transform;
             _playerCombatTarget = _playerTransform.GetComponent<CharacterCombatTarget>();
@@ -94,7 +95,7 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         private void AttackBehaviour()
         {
             _timeSinceLastSawPlayer = 0f;
-            _characterCombat.Attack(_playerCombatTarget);
+            _aiCombat.Attack(_playerCombatTarget);
         }
 
         private void SuspicionBehaviour()
@@ -120,7 +121,7 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
 
             if (_timeSinceAtLastWaypoint > _aiStats.waypointDwellingDuration)
             {
-                _characterMovement.MoveToDestination(_nextWaypointPosition,_characterStats.currentMovementSpeedFraction);
+                _aiMovement.MoveToDestination(_nextWaypointPosition,_characterStats.currentMovementSpeedFraction);
             }
         }
 
@@ -150,9 +151,9 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         {
             if (parameters.CharacterGameObject != gameObject) return;
             _canControl = false;
-            _characterCombat.CancelAction();
-            _characterMovement.CancelAction();
-            _characterMovement.DisableAgent();
+            _aiCombat.CancelAction();
+            _aiMovement.CancelAction();
+            _aiMovement.DisableAgent();
         }
     }
 }

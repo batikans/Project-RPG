@@ -38,5 +38,10 @@ namespace ProjectAssets.Project.Runtime.Character
             currentAttackRate = characterDefaultStats.attackRate;
             currentTimeBetweenAttacks = characterDefaultStats.timeBetweenAttacks;
         }
+
+        public float GetMovementSpeed()
+        {
+            return currentMaxMovementSpeed;
+        }
     }
 }

@@ -1,13 +1,14 @@
 using ProjectAssets.Project.Runtime.Core;
+using ProjectAssets.Project.Runtime.Saving;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace ProjectAssets.Project.Runtime.Character
+namespace ProjectAssets.Project.Runtime.Character.AI
 {
     [RequireComponent(typeof(CharacterStats))]
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(ActionScheduler))]
-    public class CharacterMovement : MonoBehaviour, IAction
+    public class AIMovement : MonoBehaviour, IAction, ISaveable
     {
         private NavMeshAgent _agent;
         private ActionScheduler _actionScheduler;
@@ -57,6 +58,18 @@ namespace ProjectAssets.Project.Runtime.Character
         public void CancelAction()
         {
             //TODO: Cancel Movement
+        }
+
+        public object CaptureState()
+        {
+            return new SerializableVector3(transform.position);
+        }
+
+        public void RestoreState(object state)
+        {
+            var savedPosition = (SerializableVector3) state;
+            _agent.Warp(savedPosition.ToVector());
+            //transform.position = savedPosition.ToVector();
         }
     }
 }

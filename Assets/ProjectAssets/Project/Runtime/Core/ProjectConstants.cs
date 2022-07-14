@@ -26,5 +26,8 @@ namespace ProjectAssets.Project.Runtime.Core
 
         //TAGS
         public const string TagPlayer = "Player";
+        
+        //SAVING
+        public const string SaveFile = "SaveFile";
     }
 }
