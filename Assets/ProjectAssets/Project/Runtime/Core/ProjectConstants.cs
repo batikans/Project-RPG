@@ -23,6 +23,8 @@ namespace ProjectAssets.Project.Runtime.Core
         public const string OnSentSceneNameInfo = "OnSentSceneNameInfo";
         public const string OnSceneStartedLoading = "OnSceneStartedLoading";
         public const string OnSceneFinishedLoading = "OnSceneFinishedLoading";
+        public const string OnPlayerAttackStarted = "OnPlayerAttackStarted";
+        public const string OnPlayerAttackFinished = "OnPlayerAttackFinished";
 
         //TAGS
         public const string TagPlayer = "Player";

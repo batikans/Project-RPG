@@ -1,8 +1,6 @@
-using System;
 using ProjectAssets.Project.Runtime.Character.Player;
 using ProjectAssets.Project.Runtime.Core;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 namespace ProjectAssets.Project.Runtime.Character.Controller
@@ -10,13 +8,16 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
     public class PlayerController : MonoBehaviour
     {
         private PlayerMovement _playerMovement;
+        private PlayerCombat _playerCombat;
         private PlayerInputActions _playerInputActions;
 
-        private bool _canControl = true;
+        private bool _canMove = true;
 
         private void Awake()
         {
             EventManager.StartListening(ProjectConstants.OnCharacterDead, DisableControl);
+            EventManager.StartListening(ProjectConstants.OnPlayerAttackStarted, DisableMovement);
+            EventManager.StartListening(ProjectConstants.OnPlayerAttackFinished, EnableMovement);
             
             Initialize();
         }
@@ -24,6 +25,7 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         private void Initialize()
         {
             _playerMovement = GetComponent<PlayerMovement>();
+            _playerCombat = GetComponent<PlayerCombat>();
             
             _playerInputActions = new PlayerInputActions();
             _playerInputActions.Player.Enable();
@@ -33,44 +35,47 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         private void OnDestroy()
         {
             EventManager.StopListening(ProjectConstants.OnCharacterDead, DisableControl);
+            EventManager.StopListening(ProjectConstants.OnPlayerAttackStarted, DisableMovement);
+            EventManager.StopListening(ProjectConstants.OnPlayerAttackFinished, EnableMovement);
+            
             _playerInputActions.Player.Combat.performed -= Combat;
             _playerInputActions.Player.Disable();
         }
 
         private void Update()
         {
-            if (!_canControl) return;
+            if (!_canMove) return;
             
             Movement();
         }
-
-        private static void Combat(InputAction.CallbackContext context)
-        {
-            Debug.Log("Combat!!!");
-        }
-
+        
         private void Movement()
         {
             var inputVector = _playerInputActions.Player.Movement.ReadValue<Vector2>();
-            _playerMovement.MovePlayer(inputVector);
+            _playerMovement.MovePlayer(inputVector, _canMove);
+        }
+        
+        private void Combat(InputAction.CallbackContext context)
+        {
+            _playerCombat.Attack();
         }
 
         private void DisableControl(EventParameters eventParameters)
         {
             if (eventParameters.CharacterGameObject != null && eventParameters.CharacterGameObject != gameObject) return;
 
-            _canControl = false;
+            _canMove = false;
             _playerInputActions.Player.Disable();
-            
-            //     _characterCombat.CancelAction();
-            //     _characterMovement.CancelAction();
-            //     _characterMovement.DisableAgent();
         }
 
-        private void EnableControl()
+        private void DisableMovement(EventParameters eventParameters)
         {
-            _playerInputActions.Player.Enable();
-            _canControl = true;
+            _canMove = false;
+        }
+
+        private void EnableMovement(EventParameters eventParameters)
+        {
+            _canMove = true;
         }
         
     }

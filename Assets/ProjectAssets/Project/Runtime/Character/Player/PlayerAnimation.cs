@@ -34,13 +34,11 @@ namespace ProjectAssets.Project.Runtime.Character.Player
         private void SetBlendValue()
         {
             var speed = _playerMovement.GetPlayerVelocity();
-            //var localVelocity = transform.InverseTransformDirection(velocityVector);
-            //var speed = localVelocity.z;
             
             _animator.SetFloat(ProjectConstants.AnimationBlendValue, speed);
         }
 
-        private void TriggerAnimation(string animationName, float animationSpeed = 1f)
+        public void TriggerAnimation(string animationName, float animationSpeed = 1f)
         {
             _animator.SetTrigger(animationName);
             _animator.SetFloat(ProjectConstants.AnimationAnimationSpeed, animationSpeed);

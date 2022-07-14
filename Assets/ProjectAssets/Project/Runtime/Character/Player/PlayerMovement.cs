@@ -26,22 +26,29 @@ namespace ProjectAssets.Project.Runtime.Character.Player
             GetCurrentMovementSpeed();
         }
 
-        public void MovePlayer(Vector2 inputVector)
+        public void MovePlayer(Vector2 inputVector, bool canMove)
         {
-            var horizontal = inputVector.x;
-            var vertical = inputVector.y;
-            
-            if (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f)
+            if (canMove)
             {
-                var direction = new Vector3(horizontal, 0f, vertical).normalized;
+                var horizontal = inputVector.x;
+                var vertical = inputVector.y;
+            
+                if (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f)
+                {
+                    var direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-                var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-                var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity,
-                    turnSmoothTime);
-                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+                    var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                    var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity,
+                        turnSmoothTime);
+                    transform.rotation = Quaternion.Euler(0f, angle, 0f);
                 
-                _characterController.Move(direction * _movementSpeed * Time.deltaTime);
-                _currentSpeed = _characterController.velocity.magnitude;
+                    _characterController.Move(direction * _movementSpeed * Time.deltaTime);
+                    _currentSpeed = _characterController.velocity.magnitude;
+                }
+                else
+                {
+                    _currentSpeed = 0f;
+                }
             }
             else
             {
