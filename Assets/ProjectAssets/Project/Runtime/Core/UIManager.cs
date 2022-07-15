@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -44,7 +43,6 @@ namespace ProjectAssets.Project.Runtime.Core
                 settingsCanvas.SetActive(false);
                 GameManager.Instance.UpdateGameState(GameState.Gameplay);
             }
-            //Time.timeScale = settingsCanvas.activeInHierarchy ? 0f : 1f;
         }
     }
 }
