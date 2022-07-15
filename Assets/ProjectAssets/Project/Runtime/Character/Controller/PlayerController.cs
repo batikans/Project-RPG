@@ -11,14 +11,14 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         private PlayerCombat _playerCombat;
         private PlayerInputActions _playerInputActions;
 
-        private bool _canMove = true;
-        private bool _canCombat = true;
+        private bool _canControl = true;
+        private bool _inCombat;
 
         private void Awake()
         {
             EventManager.StartListening(ProjectConstants.OnCharacterDead, DisableControlAfterDeath);
-            EventManager.StartListening(ProjectConstants.OnPlayerAttackStarted, DisableMovement);
-            EventManager.StartListening(ProjectConstants.OnPlayerAttackFinished, EnableMovement);
+            EventManager.StartListening(ProjectConstants.OnPlayerAttackStarted, AttackStarted);
+            EventManager.StartListening(ProjectConstants.OnPlayerAttackFinished, AttackFinished);
             EventManager.StartListening(ProjectConstants.OnGameStateChanged, ToggleControl);
             
             Initialize();
@@ -31,37 +31,37 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
             
             _playerInputActions = new PlayerInputActions();
             _playerInputActions.Player.Enable();
-            _playerInputActions.Player.Combat.performed += Combat;
+            _playerInputActions.Player.Combat.performed += CombatBehaviour;
         }
 
         private void OnDestroy()
         {
             EventManager.StopListening(ProjectConstants.OnCharacterDead, DisableControlAfterDeath);
-            EventManager.StopListening(ProjectConstants.OnPlayerAttackStarted, DisableMovement);
-            EventManager.StopListening(ProjectConstants.OnPlayerAttackFinished, EnableMovement);
+            EventManager.StopListening(ProjectConstants.OnPlayerAttackStarted, AttackStarted);
+            EventManager.StopListening(ProjectConstants.OnPlayerAttackFinished, AttackFinished);
             EventManager.StopListening(ProjectConstants.OnGameStateChanged, ToggleControl);
             
-            _playerInputActions.Player.Combat.performed -= Combat;
+            _playerInputActions.Player.Combat.performed -= CombatBehaviour;
             _playerInputActions.Player.Disable();
         }
 
         private void Update()
         {
-            if (!_canMove) return;
+            if (!_canControl) return;
             
-            Movement();
+            MovementBehaviour();
         }
         
-        private void Movement()
+        private void MovementBehaviour()
         {
             var inputVector = _playerInputActions.Player.Movement.ReadValue<Vector2>();
-            _playerMovement.MovePlayer(inputVector, _canMove);
+            _playerMovement.MovePlayer(inputVector, _inCombat);
         }
         
-        private void Combat(InputAction.CallbackContext context)
+        private void CombatBehaviour(InputAction.CallbackContext context)
         {
-            if (!_canCombat) return;
-            
+            if (!_canControl || _inCombat) return;
+
             _playerCombat.Attack();
         }
 
@@ -69,8 +69,7 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         {
             if (eventParameters.CharacterGameObject != null && eventParameters.CharacterGameObject != gameObject) return;
 
-            _canMove = false;
-            _canCombat = false;
+            _canControl = false;
             _playerInputActions.Player.Disable();
         }
 
@@ -78,28 +77,24 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         {
             var gameStateToUse = eventParameters.GameState;
 
-            var canMoveToUse = _canMove;
-            
             if (gameStateToUse == GameState.SettingsMenu)
             {
-                _canMove = false;
-                _canCombat = false;
+                _canControl = false;
             }
             else if (gameStateToUse == GameState.Gameplay)
             {
-                _canMove = canMoveToUse;
-                _canCombat = true;
+                _canControl = true;
             }
         }
 
-        private void DisableMovement(EventParameters eventParameters)
+        private void AttackStarted(EventParameters eventParameters)
         {
-            _canMove = false;
+            _inCombat = true;
         }
 
-        private void EnableMovement(EventParameters eventParameters)
+        private void AttackFinished(EventParameters eventParameters)
         {
-            _canMove = true;
+            _inCombat = false;
         }
         
     }

@@ -26,9 +26,9 @@ namespace ProjectAssets.Project.Runtime.Character.Player
             GetCurrentMovementSpeed();
         }
 
-        public void MovePlayer(Vector2 inputVector, bool canMove)
+        public void MovePlayer(Vector2 inputVector, bool inCombat)
         {
-            if (canMove)
+            if (!inCombat)
             {
                 var horizontal = inputVector.x;
                 var vertical = inputVector.y;
