@@ -1,5 +1,3 @@
-using System;
-using ProjectAssets.Project.Runtime.Character.AI;
 using ProjectAssets.Project.Runtime.Core;
 using UnityEngine;
 
@@ -16,7 +14,7 @@ namespace ProjectAssets.Project.Runtime.Character.Player
 
         public void Attack()
         {
-            _playerAnimation.TriggerAnimation(ProjectConstants.AnimationAttack, 3f);
+            _playerAnimation.TriggerAnimation(ProjectConstants.AnimationAttack); //attack speed can be added here
         }
 
         // private CharacterCombatTarget _lastCombatTarget;

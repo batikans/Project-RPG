@@ -59,6 +59,7 @@ namespace ProjectAssets.Project.Runtime.Core
         {
             EventManager.TriggerEvent(ProjectConstants.OnSceneStartedLoading, eventParameters);
             yield return SceneTransitionCanvas.FadeOutCoroutine(0.2f);
+            GameManager.Instance.UpdateGameState(GameState.Loading);
             
             if (_sceneNameToUnload != null)
             {

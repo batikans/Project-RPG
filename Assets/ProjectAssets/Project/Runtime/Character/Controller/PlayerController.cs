@@ -12,12 +12,14 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         private PlayerInputActions _playerInputActions;
 
         private bool _canMove = true;
+        private bool _canCombat = true;
 
         private void Awake()
         {
-            EventManager.StartListening(ProjectConstants.OnCharacterDead, DisableControl);
+            EventManager.StartListening(ProjectConstants.OnCharacterDead, DisableControlAfterDeath);
             EventManager.StartListening(ProjectConstants.OnPlayerAttackStarted, DisableMovement);
             EventManager.StartListening(ProjectConstants.OnPlayerAttackFinished, EnableMovement);
+            EventManager.StartListening(ProjectConstants.OnGameStateChanged, ToggleControl);
             
             Initialize();
         }
@@ -34,9 +36,10 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
 
         private void OnDestroy()
         {
-            EventManager.StopListening(ProjectConstants.OnCharacterDead, DisableControl);
+            EventManager.StopListening(ProjectConstants.OnCharacterDead, DisableControlAfterDeath);
             EventManager.StopListening(ProjectConstants.OnPlayerAttackStarted, DisableMovement);
             EventManager.StopListening(ProjectConstants.OnPlayerAttackFinished, EnableMovement);
+            EventManager.StopListening(ProjectConstants.OnGameStateChanged, ToggleControl);
             
             _playerInputActions.Player.Combat.performed -= Combat;
             _playerInputActions.Player.Disable();
@@ -57,15 +60,36 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
         
         private void Combat(InputAction.CallbackContext context)
         {
+            if (!_canCombat) return;
+            
             _playerCombat.Attack();
         }
 
-        private void DisableControl(EventParameters eventParameters)
+        private void DisableControlAfterDeath(EventParameters eventParameters)
         {
             if (eventParameters.CharacterGameObject != null && eventParameters.CharacterGameObject != gameObject) return;
 
             _canMove = false;
+            _canCombat = false;
             _playerInputActions.Player.Disable();
+        }
+
+        private void ToggleControl(EventParameters eventParameters)
+        {
+            var gameStateToUse = eventParameters.GameState;
+
+            var canMoveToUse = _canMove;
+            
+            if (gameStateToUse == GameState.SettingsMenu)
+            {
+                _canMove = false;
+                _canCombat = false;
+            }
+            else if (gameStateToUse == GameState.Gameplay)
+            {
+                _canMove = canMoveToUse;
+                _canCombat = true;
+            }
         }
 
         private void DisableMovement(EventParameters eventParameters)

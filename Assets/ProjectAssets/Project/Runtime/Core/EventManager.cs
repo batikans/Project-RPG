@@ -91,5 +91,6 @@ namespace ProjectAssets.Project.Runtime.Core
         public GameObject CharacterGameObject;
         public InputState InputState;
         public SceneName SceneName;
+        public GameState GameState;
     }
 }

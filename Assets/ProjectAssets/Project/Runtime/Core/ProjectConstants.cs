@@ -16,6 +16,7 @@ namespace ProjectAssets.Project.Runtime.Core
         public const string SceneLevel02 = "Level 02";
         
         //EVENT
+        public const string OnGameStateChanged = "OnGameStateChanged";
         public const string OnSentInputInfo = "OnSentInputInfo";
         public const string OnCinematicStarted = "OnCinematicStarted";
         public const string OnCinematicFinished = "OnCinematicFinished";
