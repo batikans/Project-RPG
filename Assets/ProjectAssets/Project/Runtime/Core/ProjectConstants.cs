@@ -4,6 +4,7 @@ namespace ProjectAssets.Project.Runtime.Core
     {
         //ANIMATION
         public const string AnimationBlendValue = "blendValue";
+        public const string AnimationIsMoving = "isMoving";
         public const string AnimationAttack = "attack";
         public const string AnimationAnimationSpeed = "animationSpeed";
         public const string AnimationDeath = "death";
