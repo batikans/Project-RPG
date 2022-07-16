@@ -33,15 +33,13 @@ namespace ProjectAssets.Project.Runtime.Character.Player
         
         private void SetBlendValue()
         {
-            var speed = _playerMovement.GetPlayerVelocity();
-            
-            _animator.SetFloat(ProjectConstants.AnimationBlendValue, speed);
+            _animator.SetFloat(ProjectConstants.AnimationBlendValue,
+                _playerMovement.GetInputMagnitude(), 0.05f, Time.deltaTime);
         }
 
-        public void TriggerAnimation(string animationName, float animationSpeed = 1f)
+        public void TriggerAnimation(string animationName)
         {
             _animator.SetTrigger(animationName);
-            _animator.SetFloat(ProjectConstants.AnimationAnimationSpeed, animationSpeed);
         }
         
         public void ResetTriggerAnimation(string animationName)

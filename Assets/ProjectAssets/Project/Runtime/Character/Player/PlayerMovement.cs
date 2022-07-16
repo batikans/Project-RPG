@@ -1,4 +1,3 @@
-using System;
 using ProjectAssets.Project.Runtime.Core;
 using UnityEngine;
 
@@ -12,139 +11,56 @@ namespace ProjectAssets.Project.Runtime.Character.Player
 
         private CharacterController _characterController;
         private CharacterStats _characterStats;
-        
-        private float _movementSpeed;
-        private float _currentSpeed;
-        private float _turnSmoothVelocity;
-
         private Animator _animator;
+        
+        private float _turnSmoothVelocity;
+        private float _inputMagnitude;
+
 
         private void Awake()
         {
+            _animator = GetComponent<Animator>();
             _characterController = GetComponent<CharacterController>();
             _characterStats = GetComponent<CharacterStats>();
         }
-        
+
         private void Start()
         {
-            GetCurrentMovementSpeed();
+            UpdateMovementSpeed(_characterStats.currentMaxMovementSpeed);
         }
 
         public void MovePlayer(Vector2 inputVector, bool inCombat)
         {
-            // var horizontal = inputVector.x;
-            // var vertical = inputVector.y;
-            //
-            // var movementDirection = new Vector3(horizontal, 0f, vertical);
-            // var inputMagnitude = Mathf.Clamp01(movementDirection.magnitude);
-            //
-            // _animator.SetFloat(ProjectConstants.AnimationBlendValue, inputMagnitude, 0.05f, Time.deltaTime);
-            //
-            // var speed = inputMagnitude * maxSpeed;
-            //movementDirection = Quaternion.AngleAxis()
-                
-                
-            if (!inCombat)
+            var horizontal = inputVector.x;
+            var vertical = inputVector.y;
+
+             var direction = new Vector3(horizontal, 0f, vertical);
+            _inputMagnitude = Mathf.Clamp01(direction.magnitude);
+            direction.Normalize();
+            
+            if (!inCombat && Mathf.Abs(horizontal) > 0.01f || Mathf.Abs(vertical) > 0.01f)
             {
-                var horizontal = inputVector.x;
-                var vertical = inputVector.y;
-            
-                if (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f)
-                {
-                    var direction = new Vector3(horizontal, 0f, vertical).normalized;
-            
-                    var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-                    var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity,
-                        turnSmoothTime);
-                    transform.rotation = Quaternion.Euler(0f, angle, 0f);
-                
-                    _characterController.Move(direction * _movementSpeed * Time.deltaTime);
-                    _currentSpeed = _characterController.velocity.magnitude;
-                }
-                else
-                {
-                    _currentSpeed = 0f;
-                }
+                var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity,
+                    turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);   
             }
-            else
-            {
-                _currentSpeed = 0f;
-            }    
-                
         }
-        
-        private void GetCurrentMovementSpeed()
+
+        private void OnAnimatorMove()
         {
-            _movementSpeed = _characterStats.GetMovementSpeed();
+            var velocity = _animator.deltaPosition;
+            _characterController.Move(velocity);
         }
-        
-        public float GetPlayerVelocity()
+
+        public float GetInputMagnitude()
         {
-            return _currentSpeed;
+            return _inputMagnitude;
         }
 
-
-        //******************************************************************
-
-        // [Header("Settings")]
-        // [SerializeField] private float turnSmoothTime = 0.1f;
-        //
-        // private CharacterController _characterController;
-        // private CharacterStats _characterStats;
-        //
-        // private float _movementSpeed;
-        // private float _currentSpeed;
-        // private float _turnSmoothVelocity;
-        //
-        // private void Awake()
-        // {
-        //     _characterController = GetComponent<CharacterController>();
-        //     _characterStats = GetComponent<CharacterStats>();
-        // }
-
-        // private void Start()
-        // {
-        //     GetCurrentMovementSpeed();
-        // }
-
-        // public void MovePlayer(Vector2 inputVector, bool inCombat)
-        // {
-        //     if (!inCombat)
-        //     {
-        //         var horizontal = inputVector.x;
-        //         var vertical = inputVector.y;
-        //     
-        //         if (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f)
-        //         {
-        //             var direction = new Vector3(horizontal, 0f, vertical).normalized;
-        //
-        //             var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-        //             var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity,
-        //                 turnSmoothTime);
-        //             transform.rotation = Quaternion.Euler(0f, angle, 0f);
-        //         
-        //             _characterController.Move(direction * _movementSpeed * Time.deltaTime);
-        //             _currentSpeed = _characterController.velocity.magnitude;
-        //         }
-        //         else
-        //         {
-        //             _currentSpeed = 0f;
-        //         }
-        //     }
-        //     else
-        //     {
-        //         _currentSpeed = 0f;
-        //     }
-        // }
-
-        // private void GetCurrentMovementSpeed()
-        // {
-        //     _movementSpeed = _characterStats.GetMovementSpeed();
-        // }
-        //
-        // public float GetPlayerVelocity()
-        // {
-        //     return _currentSpeed;
-        // }
+        private void UpdateMovementSpeed(float movementSpeed)
+        {
+            _animator.SetFloat(ProjectConstants.AnimationMovementSpeed, movementSpeed);
+        }
     }
 }

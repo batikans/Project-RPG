@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   health: 100
-  maxMovementSpeed: 2
+  maxMovementSpeed: 1
   movementSpeedFraction: 0.2
   attackDamage: 10
   attackRange: 2
-  attackRate: 1
+  attackRate: 1.2
   timeBetweenAttacks: 1
