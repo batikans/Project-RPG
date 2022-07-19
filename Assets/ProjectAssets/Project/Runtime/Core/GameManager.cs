@@ -17,7 +17,7 @@ namespace ProjectAssets.Project.Runtime.Core
     {
         public static GameManager Instance;
 
-        private EventParameters _eventParameters;
+        private readonly EventParameters _eventParameters = new EventParameters();
         private GameState _gameState;
         
         private void Awake()

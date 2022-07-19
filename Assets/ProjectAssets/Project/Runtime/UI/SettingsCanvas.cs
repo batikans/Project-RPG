@@ -5,17 +5,17 @@ namespace ProjectAssets.Project.Runtime.UI
 {
     public class SettingsCanvas : MonoBehaviour
     {
-        public void SaveGame()
+        public void OnPressedSaveGame()
         {
-            
+            EventManager.TriggerEvent(ProjectConstants.OnSaveGame);
         }
 
-        public void LoadGame()
+        public void OnPressedLoadGame()
         {
-            
+            EventManager.TriggerEvent(ProjectConstants.OnLoadGame);
         }
         
-        public void QuitApplication()
+        public void OnPressedQuitApplication()
         {
             Application.Quit();
         }

@@ -5,12 +5,10 @@ namespace ProjectAssets.Project.Runtime.Character.Animation
 {
     public class PlayerAttackAnimation : StateMachineBehaviour
     {
-        private EventParameters _eventParameters;
-        
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-        override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            EventManager.TriggerEvent(ProjectConstants.OnPlayerAttackStarted, _eventParameters);
+            EventManager.TriggerEvent(ProjectConstants.OnPlayerAttackStarted);
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -20,9 +18,9 @@ namespace ProjectAssets.Project.Runtime.Character.Animation
         //}
 
         // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-        override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            EventManager.TriggerEvent(ProjectConstants.OnPlayerAttackFinished, _eventParameters);
+            EventManager.TriggerEvent(ProjectConstants.OnPlayerAttackFinished);
         }
 
         // OnStateMove is called right after Animator.OnAnimatorMove()

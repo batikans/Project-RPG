@@ -87,12 +87,12 @@ namespace ProjectAssets.Project.Runtime.Character.Controller
             }
         }
 
-        private void AttackStarted(EventParameters eventParameters)
+        private void AttackStarted()
         {
             _inCombat = true;
         }
         
-        private void AttackFinished(EventParameters eventParameters)
+        private void AttackFinished()
         {
             _inCombat = false;
         }

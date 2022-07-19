@@ -210,7 +210,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1934128078}
         m_TargetAssemblyTypeName: ProjectAssets.Project.Runtime.UI.SettingsCanvas,
           Project.Runtime.UI
-        m_MethodName: LoadGame
+        m_MethodName: OnPressedLoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -793,7 +793,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1934128078}
         m_TargetAssemblyTypeName: ProjectAssets.Project.Runtime.UI.SettingsCanvas,
           Project.Runtime.UI
-        m_MethodName: SaveGame
+        m_MethodName: OnPressedSaveGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1008,7 +1008,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1934128078}
         m_TargetAssemblyTypeName: ProjectAssets.Project.Runtime.UI.SettingsCanvas,
           Project.Runtime.UI
-        m_MethodName: QuitApplication
+        m_MethodName: OnPressedQuitApplication
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

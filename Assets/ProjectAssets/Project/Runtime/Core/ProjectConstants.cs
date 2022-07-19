@@ -29,6 +29,8 @@ namespace ProjectAssets.Project.Runtime.Core
         public const string OnSceneFinishedLoading = "OnSceneFinishedLoading";
         public const string OnPlayerAttackStarted = "OnPlayerAttackStarted";
         public const string OnPlayerAttackFinished = "OnPlayerAttackFinished";
+        public const string OnSaveGame = "OnSaveGame";
+        public const string OnLoadGame = "OnLoadGame";
 
         //TAGS
         public const string TagPlayer = "Player";

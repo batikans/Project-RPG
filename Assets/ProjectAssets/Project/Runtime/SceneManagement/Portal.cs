@@ -10,7 +10,7 @@ namespace ProjectAssets.Project.Runtime.SceneManagement
 
         private bool _isPortalActivated;
         
-        private EventParameters _eventParameters;
+        private EventParameters _eventParameters = new EventParameters();
         
         private void OnTriggerEnter(Collider other)
         {

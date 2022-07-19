@@ -8,7 +8,7 @@ namespace ProjectAssets.Project.Runtime.CameraAndCinematics
     {
         private PlayableDirector _playableDirector;
 
-        private EventParameters _eventParameters;
+        private EventParameters _eventParameters = new EventParameters();
         
         private void Awake()
          {
