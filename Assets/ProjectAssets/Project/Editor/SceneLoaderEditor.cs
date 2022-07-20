@@ -34,6 +34,11 @@ namespace ProjectAssets.Project.Editor
                 var scenePath = "Assets/ProjectAssets/Scenes/Level 02.unity";
                 EditorSceneManager.OpenScene(scenePath);
             }
+            if (GUILayout.Button("Load Playground"))
+            {
+                var scenePath = "Assets/ProjectAssets/Project/Extensions/StarterAssets/ThirdPersonController/Scenes/Playground.unity";
+                EditorSceneManager.OpenScene(scenePath);
+            }
         }
     }
 }
